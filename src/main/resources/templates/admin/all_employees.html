@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title th:text="${title}"></title>
+
+    <th:block th:replace="~{fragments/common_css::commonCss}"></th:block>
+  </head>
+  <body>
+    <header
+      th:replace="~{fragments/admin_header::adminHeaderFragment}"
+    ></header>
+
+    <main class="main-body">
+      <div class="container mt-5">
+        <h2 class="text-center mb-4 text-primary">Employee List</h2>
+
+        <div
+          class="table-responsive shadow rounded mx-auto"
+          style="max-width: 1200px"
+        >
+          <table
+            class="table table-striped table-bordered table-hover align-middle text-center"
+          >
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Qualification</th>
+                <th scope="col">Experience</th>
+                <th scope="col">Description</th>
+                <th scope="col">Charges</th>
+                <th scope="col">Employee Pfp</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="employee : ${employees}">
+                <td th:text="${employee.name}">Name</td>
+                <td th:text="${employee.phone}">Phone</td>
+                <td th:text="${employee.qualification}">Qualification</td>
+                <td th:text="${employee.experience}">Experience</td>
+                <td th:text="${employee.description}">Description</td>
+                <td th:text="${employee.charges}">Charges</td>
+                <td>
+                  <img
+                    th:src="@{'/' + ${employee.employeePic}}"
+                    class="rounded shadow-sm"
+                    style="width: 80px; height: 80px; object-fit: cover"
+                    alt="Employee Pic"
+                  />
+                </td>
+                <td>
+                  <a
+                    th:href="@{/admin/deleteEmployee(employee_id=${employee.employeeId})}"
+                    class="btn btn-outline-danger btn-sm me-2"
+                    >Delete</a
+                  >
+                  <a
+                    th:href="@{/admin/editEmployee(employee_id=${employee.employeeId})}"
+                    class="btn btn-outline-success btn-sm"
+                    >Edit</a
+                  >
+                </td>
+              </tr>
+              <tr th:if="${employees.isEmpty()}">
+                <td colspan="8" class="text-center text-muted">
+                  No employees found.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <footer
+      th:replace="~{fragments/admin_footer::adminFooterFragment}"
+    ></footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

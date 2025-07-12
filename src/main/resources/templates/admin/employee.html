@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}"></title>
+
+<th:block th:replace="~{fragments/common_css::commonCss}"></th:block>
+</head>
+<body>
+
+<header th:replace="~{fragments/admin_header::adminHeaderFragment}"></header>
+
+<div th:if="${msg}" class="alert alert-danger alert-dismissible fade show mx-3 my-3 text-center" role="alert">
+  <span th:text="${msg}"></span>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<main class="main-body container d-flex justify-content-center align-items-center mt-5 mb-5" style="min-height: 100vh;">
+  <div class="col-md-8">
+    <div class="card shadow-lg">
+      <div class="card-body">
+        <h2 class="text-center mb-4">Add Employee</h2>
+
+        <form action="/admin/addEmployee" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+          
+          <!-- Employee Id -->
+          <div class="mb-3">
+            <label for="employeeId" class="form-label">Employee Id</label>
+            <input type="text" class="form-control" id="employeeId" name="employeeId" required/>
+            <div class="invalid-feedback">Please enter the employee's id.</div>
+          </div>
+          
+          <!-- Name -->
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" required/>
+            <div class="invalid-feedback">Please enter the employee's name.</div>
+          </div>
+
+          <!-- Phone -->
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="phone" name="phone" required/>
+            <div class="invalid-feedback">Please enter a valid phone number.</div>
+          </div>
+
+          <!-- Qualification -->
+          <div class="mb-3">
+            <label for="qualification" class="form-label">Qualification</label>
+            <input type="text" class="form-control" id="qualification" name="qualification" required/>
+            <div class="invalid-feedback">Please enter the qualification.</div>
+          </div>
+
+          <!-- Experience -->
+          <div class="mb-3">
+            <label for="experience" class="form-label">Experience (in years)</label>
+            <input type="number" class="form-control" id="experience" name="experience" min="0" required/>
+            <div class="invalid-feedback">Please enter experience in years.</div>
+          </div>
+
+          <!-- Gender -->
+          <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="male" value="Male" required/>
+                <label class="form-check-label" for="male">Male</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="female" value="Female"/>
+                <label class="form-check-label" for="female">Female</label>
+              </div>
+            </div>
+            <div class="invalid-feedback">Please select gender.</div>
+          </div>
+
+          <!-- Employee Type (dropdown) -->
+          <div class="mb-3">
+            <label for="employeeType" class="form-label">Employee Type</label>
+            <select class="form-select" id="employeeType" name="employeeType" required>
+              <option value="" disabled selected>Select type</option>
+              <option value="Electrician">Electrician</option>
+              <option value="Gardener">Gardener</option>
+              <option value="Maid">Maid</option>
+              <option value="Plumber">Plumber</option>
+              <option value="Painter">Painter</option>
+              <option value="Cook">Cook</option>
+              <option value="Welder">Welder</option>
+              <option value="Locksmith">Locksmith</option>
+            </select>
+            <div class="invalid-feedback">Please select an employee type.</div>
+          </div>
+
+          <!-- Service Type (radio buttons) -->
+          <div class="mb-3">
+            <label class="form-label">Service Type</label>
+            <div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="serviceType" id="long_term" value="LTS" required/>
+                <label class="form-check-label" for="long_term">Long Term Service</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="serviceType" id="short_term" value="STS"/>
+                <label class="form-check-label" for="short_term">Short Term Service</label>
+              </div>
+            </div>
+            <div class="invalid-feedback">Please select service type.</div>
+          </div>
+
+          <!-- Employee Pic (file) -->
+          <div class="mb-3">
+            <label class="form-label">Employee Picture</label>
+            <input class="form-control" type="file" name="profileImage" required/>
+            <div class="invalid-feedback">Please upload an employee picture.</div>
+          </div>
+
+          <!-- Charges -->
+          <div class="mb-3">
+            <label for="charges" class="form-label">Charges (per day/month)</label>
+            <input type="text" class="form-control" id="charges" name="charges" required/>
+            <div class="invalid-feedback">Please enter service charges.</div>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+            <div class="invalid-feedback">Please enter a description.</div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="d-grid">
+            <button type="submit" class="btn btn-success">Add Employee</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/admin_footer::adminFooterFragment}"></footer>
+
+<script>
+  // Bootstrap form validation
+  (() => {
+    'use strict'
+    const forms = document.querySelectorAll('.needs-validation')
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+</script>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+  crossorigin="anonymous"
+></script>
+</body>
+</html>

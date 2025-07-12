@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title th:text="${title}"></title>
+
+    <!-- Include Bootstrap and custom styles -->
+    <th:block th:replace="~{fragments/common_css::commonCss}"></th:block>
+  </head>
+
+  <body>
+    <!-- Admin navbar -->
+    <header th:replace="~{fragments/admin_header::adminHeaderFragment}"></header>
+
+    <main class="main-body py-5">
+      <div class="container">
+        <h1 class="text-center mb-4">Welcome to the Admin Dashboard</h1>
+        <h4 class="text-center text-secondary mb-5" th:text="'Logged in as: ' + ${adminInfo.email}"></h4>
+
+        <div class="row g-4">
+          <!-- View Cards -->
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-primary shadow">
+              <div class="card-body text-center">
+                <i class="bi bi-eye fs-1 text-primary mb-3"></i>
+                <h5 class="card-title">View Data</h5>
+                <p class="card-text">Access all Notices, Users, Employees, and Contact queries.</p>
+                <a th:href="@{/admin/viewUsers}" class="btn btn-outline-primary btn-sm me-2">Users</a>
+                <a th:href="@{/admin/viewEmployees}" class="btn btn-outline-primary btn-sm me-2">Employees</a>
+                <a th:href="@{/admin/viewNotices}" class="btn btn-outline-primary btn-sm me-2">Notices</a>
+                <a th:href="@{/admin/viewContacts}" class="btn btn-outline-primary btn-sm">Contacts</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add Data Card -->
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-success shadow">
+              <div class="card-body text-center">
+                <i class="bi bi-plus-circle fs-1 text-success mb-3"></i>
+                <h5 class="card-title">Add New Records</h5>
+                <p class="card-text">Add employees and important notices for users.</p>
+                <a th:href="@{/admin/addEmployee}" class="btn btn-outline-success btn-sm me-3">Add Employee</a>
+                <a th:href="@{/admin/addNotice}" class="btn btn-outline-success btn-sm">Add Notice</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- User Bookings -->
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-warning shadow">
+              <div class="card-body text-center">
+                <i class="bi bi-card-checklist fs-1 text-warning mb-3"></i>
+                <h5 class="card-title">Manage Bookings</h5>
+                <p class="card-text">Approve or reject bookings made by users for services.</p>
+                <a th:href="@{/admin/bookings}" class="btn btn-outline-warning btn-sm">View Bookings</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer th:replace="~{fragments/admin_footer::adminFooterFragment}"></footer>
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Bootstrap Icons CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+  </body>
+</html>

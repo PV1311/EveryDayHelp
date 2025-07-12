@@ -1,0 +1,55 @@
+<header th:fragment="adminHeaderFragment" class="container-fluid bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" th:href="@{/}">EveryDayPortal</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+
+          <!-- Home link -->
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/adminHome}">Home</a>
+          </li>
+
+          <!-- View Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="viewDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              View
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="viewDropdown">
+              <li><a class="dropdown-item" th:href="@{/admin/allUsers}">View Users</a></li>
+              <li><a class="dropdown-item" th:href="@{/admin/allEmployees}">View Employees</a></li>
+              <li><a class="dropdown-item" th:href="@{/admin/allContacts}">View Contacts</a></li>
+              <li><a class="dropdown-item" th:href="@{/admin/allNotices}">View Notices</a></li>
+            </ul>
+          </li>
+
+          <!-- Add Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="addDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Add
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="addDropdown">
+              <li><a class="dropdown-item" th:href="@{/admin/addNotice}">Add Notice</a></li>
+              <li><a class="dropdown-item" th:href="@{/admin/addEmployee}">Add Employee</a></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/bookings}"> UserBooking</a>
+          </li>
+
+          <!-- Logout link -->
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/adminLogout}">LogOut</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

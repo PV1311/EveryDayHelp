@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title th:text="${title}"></title>
+
+    <th:block th:replace="~{fragments/common_css::commonCss}"></th:block>
+  </head>
+  <body>
+    <header
+      th:replace="~{fragments/admin_header::adminHeaderFragment}"
+    ></header>
+
+    <main class="main-body">
+      <div
+        class="d-flex justify-content-center align-items-center"
+        style="min-height: 80vh"
+      >
+        <form
+          method="post"
+          th:action="@{/admin/editEmployee}"
+          th:object="${employee}"
+          class="p-4 border rounded shadow bg-white needs-validation"
+          style="width: 400px"
+          novalidate
+        >
+          <h2 class="text-center mb-4">Edit Employee</h2>
+
+          <input type="hidden" th:field="*{employeeId}" />
+
+          <div class="mb-3">
+            <label for="experience" class="form-label"
+              >Experience (in years)</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="experience"
+              name="experience"
+              min="0"
+              required
+              th:field="*{experience}"
+            />
+            <div class="invalid-feedback">
+              Please enter experience in years.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="phone"
+              name="phone"
+              pattern="[0-9]{10}"
+              required
+              th:field="*{phone}"
+            />
+            <div class="invalid-feedback">
+              Please enter a valid 10-digit phone number.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="qualification" class="form-label">Qualification</label>
+            <input
+              type="text"
+              class="form-control"
+              id="qualification"
+              name="qualification"
+              required
+              th:field="*{qualification}"
+            />
+            <div class="invalid-feedback">Please enter the qualification.</div>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Edit</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer
+      th:replace="~{fragments/admin_footer::adminFooterFragment}"
+    ></footer>
+
+    <script>
+      (() => {
+        "use strict";
+        const forms = document.querySelectorAll(".needs-validation");
+        Array.from(forms).forEach((form) => {
+          form.addEventListener(
+            "submit",
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

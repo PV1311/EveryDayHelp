@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title th:text="${title}"></title>
+    <th:block th:replace="~{fragments/common_css::commonCss}"></th:block>
+  </head>
+  <body>
+
+    <header th:replace="~{fragments/user_header::userHeaderFragment}"></header>
+
+    <div class="main-body">
+      <main class="container my-5 d-flex justify-content-center">
+        <div class="card shadow-lg p-4" style="max-width: 600px; width: 100%">
+          <div class="card-body">
+            <h2 class="card-title text-center mb-4">Booking Service Form</h2>
+
+            <form
+              th:action="@{/booking}"
+              th:object="${booking}"
+              method="post"
+              class="needs-validation"
+              novalidate
+            >
+              <!-- Step 1: Dropdowns -->
+              <div class="mb-3">
+                <label for="serviceType" class="form-label">Service Type</label>
+                <select
+                  id="serviceType"
+                  th:field="*{serviceType}"
+                  class="form-select"
+                  required
+                >
+                  <option value="">--Select--</option>
+                  <option value="Long Term">LTS</option>
+                  <option value="Short Term">STS</option>
+                </select>
+                <div class="invalid-feedback">Please select a service type.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="employeeType" class="form-label">Employee Type</label>
+                <select
+                  id="employeeType"
+                  th:field="*{employeeType}"
+                  class="form-select"
+                  required
+                >
+                  <option value="">--Select--</option>
+                  <option value="Electrician">Electrician</option>
+                  <option value="Gardener">Gardener</option>
+                  <option value="Maid">Maid</option>
+                  <option value="Plumber">Plumber</option>
+                  <option value="Painter">Painter</option>
+                  <option value="Cook">Cook</option>
+                  <option value="Welder">Welder</option>
+                  <option value="Locksmith">Locksmith</option>
+                </select>
+                <div class="invalid-feedback">Please select an employee type.</div>
+              </div>
+
+              <!-- Step 2: Show Charges and Description -->
+              <div id="employeeInfoSection" class="mb-3" style="display: none;">
+                <p><strong>Charges:</strong> <span id="chargesText"></span></p>
+                <p><strong>Description:</strong> <span id="descriptionText"></span></p>
+                <button type="button" class="btn btn-info" id="continueBtn">Continue</button>
+              </div>
+
+              <!-- Step 3: Final fields -->
+              <div id="finalFormSection" style="display: none;">
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    th:value="${user.email}"
+                    class="form-control"
+                    readonly
+                    required
+                  />
+                  <div class="invalid-feedback">Please enter a valid email.</div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="userMessage" class="form-label">Message</label>
+                  <textarea
+                    id="userMessage"
+                    th:field="*{userMessage}"
+                    class="form-control"
+                    rows="4"
+                    placeholder="I need a maid for two weeks..."
+                  ></textarea>
+                </div>
+
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <footer th:replace="~{fragments/footer::footerFragment}"></footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Step Logic Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const serviceTypeEl = document.getElementById('serviceType');
+        const employeeTypeEl = document.getElementById('employeeType');
+        const infoSection = document.getElementById('employeeInfoSection');
+        const continueBtn = document.getElementById('continueBtn');
+        const finalForm = document.getElementById('finalFormSection');
+
+        function fetchEmployeeData() {
+          const serviceType = serviceTypeEl.value;
+          const employeeType = employeeTypeEl.value;
+
+          if (serviceType && employeeType) {
+            fetch(`/employeeInfo?serviceType=${serviceType}&employeeType=${employeeType}`)
+              .then(res => res.json())
+              .then(data => {
+                document.getElementById('chargesText').textContent = data.charges;
+                document.getElementById('descriptionText').textContent = data.description;
+                infoSection.style.display = 'block';
+              })
+              .catch(err => {
+                alert("No employee found or error occurred.");
+                infoSection.style.display = 'none';
+              });
+          } else {
+            infoSection.style.display = 'none';
+          }
+        }
+
+        serviceTypeEl.addEventListener('change', fetchEmployeeData);
+        employeeTypeEl.addEventListener('change', fetchEmployeeData);
+
+        continueBtn.addEventListener('click', () => {
+          continueBtn.style.display = 'none';
+          finalForm.style.display = 'block';
+        });
+      });
+    </script>
+  </body>
+</html>

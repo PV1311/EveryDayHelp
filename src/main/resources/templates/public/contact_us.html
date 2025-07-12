@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title th:text="${title}"></title>
+
+    <th:block th:replace="~{fragments/common_css::commonCss}"></th:block>
+  </head>
+  <body>
+    <header th:replace="~{fragments/header::headerFragment}"></header>
+
+    <!-- <h2 th:if="${msg}" th:text="${msg}" class="text-danger"></h2> -->      <!-- th:if means if there is value in msg then that will be shown in
+                                                                                     th:text="${msg}" -->
+
+    <div th:if="${msg}" class="alert alert-danger alert-dismissible fade show mx-3 my-3 text-center" role="alert">
+      <span th:text="${msg}"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <main class="main-body container mt-5 mb-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card shadow-lg">
+            <div class="card-body">
+              <h2 class="text-center mb-4">Contact Us</h2>
+
+              <!-- Below, in action we define the mapping on controller where the form data will go -->
+              <form
+                action="/contactUs"
+                method="post"
+                class="needs-validation"
+                novalidate
+              >
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"
+                    required
+                  />
+                  <div class="invalid-feedback">Please enter your name.</div>
+                </div>
+
+                <!-- One way of sending data from form to controller is that in the form, the attribute name, like name="phone", should be same as the fields
+                     we define in the entity(in our case it is the Contacts.java entity class), only then the data from form will be accepted as an object in
+                     the controller -->
+
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Please enter a valid email address.
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="phone" class="form-label">Phone</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="phone"
+                    name="phone"
+                    required
+                    pattern="[0-9]{10}"
+                  />
+                  <div class="invalid-feedback">
+                    Please enter a valid 10-digit phone number.
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="question" class="form-label">Your Question</label>
+                  <textarea
+                    class="form-control"
+                    id="question"
+                    name="question"
+                    rows="4"
+                    required
+                  ></textarea>
+                  <div class="invalid-feedback">
+                    Please enter your question.
+                  </div>
+                </div>
+
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <footer th:replace="~{fragments/footer::footerFragment}"></footer>
+
+    <script src="/js/validation.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

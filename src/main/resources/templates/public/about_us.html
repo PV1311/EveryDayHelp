@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+  <!-- We do this URI to access thymeleaf -->
+  <head>
+    <meta charset="UTF-8" />
+    <title>About Us</title>
+    <!-- Here we dynamically add a title to the page -->
+
+    <!-- Below we added the custom_css.html file which is a fragment in fragments folder. It has <link> tags for Bootstrap, FontAwesome, and local css file -->
+    <!-- To add a fragment to our page, we use th:replace and inside it we use "~{}" and further in it, we write folder name first, then file name, then 2
+         colons(::) and then fragment name -->
+    <th:block th:replace="~{fragments/common_css::commonCss}"></th:block>
+  </head>
+  <body>
+    <!-- Below we added the header fragment in our code -->
+    <header th:replace="~{fragments/header::headerFragment}"></header>
+
+    <main class="main-body py-5">
+      <div class="container">
+        <h1 class="text-center text-primary mb-4">About EveryDay Help</h1>
+        <p class="text-center mb-5 lead">
+          EveryDay Help is your trusted platform for quick and reliable access
+          to professional household services. We connect you with skilled and
+          verified service providers to make your everyday life easier.
+        </p>
+
+        <div class="row g-4">
+          <!-- Electrician -->
+          <div class="col-md-6">
+            <div class="card shadow h-100 border-primary">
+              <div class="card-body">
+                <h4 class="card-title text-primary text-center">Electrician</h4>
+                <p class="card-text">
+                  Our certified electricians are available for installations,
+                  repairs, and maintenance. Whether it's fixing wiring or
+                  installing new fixtures, safety and reliability are our
+                  priorities.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gardener -->
+          <div class="col-md-6">
+            <div class="card shadow h-100 border-success">
+              <div class="card-body">
+                <h4 class="card-title text-success text-center">Gardener</h4>
+                <p class="card-text">
+                  Our experienced gardeners help you maintain lush green lawns,
+                  healthy plants, and clean outdoor spaces. Services include
+                  pruning, planting, mowing, and seasonal care.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Maid -->
+          <div class="col-md-6">
+            <div class="card shadow h-100 border-warning">
+              <div class="card-body">
+                <h4 class="card-title text-warning text-center">Maid</h4>
+                <p class="card-text">
+                  Trained domestic helpers available for daily cleaning,
+                  dishwashing, dusting, laundry, and other household chores to
+                  maintain a clean and organized home.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Plumber -->
+          <div class="col-md-6">
+            <div class="card shadow h-100 border-danger">
+              <div class="card-body">
+                <h4 class="card-title text-danger text-center">Plumber</h4>
+                <p class="card-text">
+                  Expert plumbers for fixing leaks, unclogging drains, pipe
+                  fittings, bathroom repairs, and water tank services. Fast,
+                  clean, and efficient plumbing solutions.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Painter -->
+          <div class="col-md-6">
+            <div class="card shadow h-100 border-info">
+              <div class="card-body">
+                <h4 class="card-title text-info text-center">Painter</h4>
+                <p class="card-text">
+                  Brighten your space with our professional painting services.
+                  We offer wall prep, indoor/outdoor painting, and texture work
+                  using quality tools and finishes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cook -->
+          <div class="col-md-6">
+            <div class="card shadow h-100 border-secondary">
+              <div class="card-body">
+                <h4 class="card-title text-secondary text-center">Cook</h4>
+                <p class="card-text">
+                  Hire home cooks who can prepare daily meals, follow special
+                  diets, or cook for events. Our cooks are experienced with
+                  Indian and regional cuisines.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Welder -->
+          <div class="col-md-6">
+            <div class="card shadow h-100 border-dark">
+              <div class="card-body">
+                <h4 class="card-title text-dark text-center">Welder</h4>
+                <p class="card-text">
+                  Certified welders for gate repair, railing installations,
+                  fabrication, and metal work. Precision and strength are
+                  guaranteed with our welding services.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Locksmith -->
+          <div class="col-md-6">
+            <div class="card shadow h-100 border-muted">
+              <div class="card-body">
+                <h4 class="card-title text-muted text-center">Locksmith</h4>
+                <p class="card-text">
+                  Lost keys? Broken locks? Our locksmiths offer fast and secure
+                  solutions for home, office, and vehicle locks, including
+                  installations and repairs.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-5">
+          <p class="text-muted">
+            For bookings, please register first and for inquiries, please visit the Home page or Contact Us
+            section.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <footer th:replace="~{fragments/footer::footerFragment}"></footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

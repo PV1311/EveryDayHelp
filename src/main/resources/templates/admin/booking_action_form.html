@@ -1,0 +1,57 @@
+<!-- booking_action_form.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title th:text="${title}"></title>
+
+    <th:block th:replace="~{fragments/common_css::commonCss}"></th:block>
+  </head>
+  <body>
+    <header
+      th:replace="~{fragments/admin_header::adminHeaderFragment}"
+    ></header>
+
+    <div class="main-body">
+      <main class="container py-5 d-flex justify-content-center">
+        <div class="card shadow p-4" style="max-width: 600px; width: 100%">
+          <div class="card-body">
+            <h3 class="mb-3 text-center">Booking Remarks</h3>
+            <form th:action="@{/admin/booking/process}" method="post">
+              <input type="hidden" name="id" th:value="${booking.id}" />
+
+              <div class="mb-3">
+                <label for="remarks" class="form-label">Remarks</label>
+                <textarea
+                  name="adminMessage"
+                  class="form-control"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <button name="action" value="approve" class="btn btn-success">
+                  Approve
+                </button>
+                <button name="action" value="reject" class="btn btn-danger">
+                  Reject
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <footer
+      th:replace="~{fragments/admin_footer::adminFooterFragment}"
+    ></footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
